@@ -1,0 +1,47 @@
+{% extends "digital-land-frontend/dlf-base.html" %}
+{% from 'digital-land-frontend/components/feedback-panel/macro.html' import dlFeedbackPanel %}
+
+{% block pageTitle %}{{ content.name }} | Products | Digital Land{% endblock %}
+
+{% block beforeContent %}
+  {% include 'digital-land-frontend/partials/dl-prototype-banner.html' %}
+  {% block dl_breadcrumbs %}
+  {{ govukBreadcrumbs({
+    "items": [
+      {
+        "text": "Digital Land",
+        "href": "https://digital-land.github.io/"
+      },
+      {
+        "text": "Products",
+        "href": "/product"
+      },
+      {
+        "text": content.name
+      }
+    ]
+  }) }}
+  {% endblock %}
+{% endblock %}
+
+{% block content %}
+<span class="govuk-caption-xl">Project</span>
+<h1 class="govuk-heading-xl">
+    {{ content.name }}
+    {% if content.status -%}
+    <div>
+        <strong class="govuk-tag govuk-!-margin-top-4 govuk-!-margin-bottom-0">{{ content.status }}</strong>
+    </div>
+    {%- endif %}
+</h1>
+
+{{ content.body|safe }}
+
+
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+{{ dlFeedbackPanel({
+    "title": "Help improve this page",
+    "html": 'If you’ve got a question, idea or suggestion share it with the digital land team on <a href="https://github.com/digital-land/design-system">github</a> or email us on <a href="mailto:DigitalLand@communities.gov.uk">digitalland@communities.gov.uk</a>'
+}) }}
+
+{% endblock content %}
